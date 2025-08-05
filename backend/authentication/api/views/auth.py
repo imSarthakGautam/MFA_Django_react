@@ -1,4 +1,3 @@
-# authentication/api/views/auth.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -35,13 +34,15 @@ class RegisterView(APIView):
                 qr.save(buffer, format="PNG")
                 img_str = base64.b64encode(buffer.getvalue()).decode()
             else:
+                otp_uri = None
                 img_str = None  # In case MFA is already set (unlikely)
             refresh = RefreshToken.for_user(user)
             return Response({
                 "token": str(refresh.access_token),
                 "user": {"email": user.email},
                 "mfaRequired": True,
-                "qr_code_base64": img_str
+                "qr_code_base64": img_str,
+                "otp_uri": otp_uri  # Add TOTP URI
             }, status=status.HTTP_201_CREATED)
         print('Serializer errors:', serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -74,7 +75,8 @@ class LoginView(APIView):
                     "token": str(refresh.access_token),
                     "user": {"email": user.email},
                     "mfaRequired": True,
-                    "qr_code_base64": img_str
+                    "qr_code_base64": img_str,
+                    "otp_uri": otp_uri  # Add TOTP URI
                 }, status=status.HTTP_200_OK)
 
             refresh = RefreshToken.for_user(user)

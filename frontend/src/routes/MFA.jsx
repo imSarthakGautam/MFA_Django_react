@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import MFAForm from '../components/MFAForm';
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import MFAForm from "../components/MFAForm";
 
 export default function MFA() {
   const location = useLocation();
@@ -9,8 +9,8 @@ export default function MFA() {
 
   useEffect(() => {
     if (!qrCode) {
-      console.error('No QR code in location.state');
-      navigate('/register');
+      console.error("No QR code in location.state");
+      navigate("/register");
     }
   }, [qrCode, navigate]);
 

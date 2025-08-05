@@ -1,6 +1,11 @@
 
 # Auth_2FA_DjangoReact
 
+<div class="image-container">
+ <img src="./Screenshot 2025-08-05 140813.png" alt="Description for second image">
+  <img src="./Screenshot 2025-08-05 140444.png" alt="Description for first image">
+ 
+</div>
 A full-stack web application built with Django REST Framework and React, implementing user authentication with two-factor authentication (2FA) using TOTP (Time-based One-Time Password). 
 
 The backend provides APIs for user registration, login, and MFA setup/verification, while the frontend offers a responsive interface for user interaction.
