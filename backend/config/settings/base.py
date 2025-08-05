@@ -32,8 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
-    
+    'corsheaders',
     'authentication',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -148,3 +148,19 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
+CORS_ALLOW_ALL_ORIGINS = True  # Temporary
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+      "http://localhost:5173", 
+]
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+]
+APPEND_SLASH = False  # Prevent 301 redirects
